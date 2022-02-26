@@ -39,9 +39,14 @@ app.post('/cypher', urlencodedParser, (req, res) => {
   }
 
   const doc = {
-    email: body.email,
+    user_name: body.user_name,
+    heir_name: body.heir_name,
+    heir_email : body.heir_email,
+    user_email: body.user_email,
+    death_certificate: null,
     cypherbody: body.cypherbody
   }
+
   MongoClient.connect(mongoURI, function(err, db) {
     if (err) throw err;
     var dbo = db.db("cypherdb");
@@ -57,6 +62,7 @@ app.post('/cypher', urlencodedParser, (req, res) => {
     message: "success"
   })
 })
+
 
 app.listen(port, () => {
   console.log(` app listening on port ${port}`)
