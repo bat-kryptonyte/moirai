@@ -1,8 +1,14 @@
 import logo from './logo.svg';
+
+import { Route , Switch } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import './App.css';
 
+import { ChakraProvider, theme } from '@chakra-ui/react'
 function App() {
   return (
+
+    <ChakraProvider theme={theme}>
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -19,6 +25,8 @@ function App() {
         </a>
       </header>
     </div>
+
+    </ChakraProvider>
   );
 }
 
