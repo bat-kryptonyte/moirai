@@ -1,7 +1,8 @@
-const MongoClient  = require("mongodb").MongoClient;
+const {MongoClient} = require("mongodb");
 
 const mongoURI = 'mongodb+srv://hackathon:mLFB22sNqCHL49y@hackathon.qwrst.mongodb.net/cypherdb?retryWrites=true&w=majority'
 const DATABASE = 'cypherdb'
+const client = new MongoClient(mongoURI);
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -18,10 +19,10 @@ const port = 3000
 // });
 
 
-app.post('/cypher', urlencodedParser, (req, res) => {
+app.post('/cypher', urlencodedParser, async (req, res) => {
   const body = req.body
   const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-  if (!emailRegexp.test(body.email)) {
+  if (!emailRegexp.test(body.user_email) || !emailRegexp.test(body.heir_email)) {
     res.send(
       {
         status: -1,
@@ -29,11 +30,12 @@ app.post('/cypher', urlencodedParser, (req, res) => {
       })
     return
   }
-  if (req.body.cypherbody == undefined) {
+  if (body.cypherbody == undefined || body.user_name == undefined ||
+    body.heir_name == undefined) {
     res.send(
       {
         status: -1,
-        message: "cypherbody"
+        message: "invalid body data"
       })
     return
   }
@@ -41,26 +43,39 @@ app.post('/cypher', urlencodedParser, (req, res) => {
   const doc = {
     user_name: body.user_name,
     heir_name: body.heir_name,
-    heir_email : body.heir_email,
+    heir_email: body.heir_email,
     user_email: body.user_email,
     death_certificate: null,
     cypherbody: body.cypherbody
   }
+  try {
+    await client.connect();
+    const database = client.db("cypherdb");
+    const collection = database.collection("cypher");
+    // Query for a movie that has the title 'The Room'
+    const query_heir = { heir_email: doc.heir_email };
+    const query_user = { user_email: doc.user_email };
 
-  MongoClient.connect(mongoURI, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("cypherdb");
+    const heir_email_res = await collection.findOne(query_heir);
+    const user_email_res = await collection.findOne(query_user);
     
-    dbo.collection("cypher").insertOne(doc, function(err, res) {
-      if (err) throw err;
-      console.log("1 document inserted");
-      db.close();
-    });
-  });
-  res.send({
-    status: 0,
-    message: "success"
-  })
+    if (heir_email_res != null || user_email_res != null) {
+      res.send({
+        status: -1,
+        message: "invalid body data"
+      })
+      client.close()
+      return
+    }
+    await collection.insertOne(doc);
+    res.send({
+      status: 0,
+      message: "success"
+    })
+    // since this method returns the matched document, not a cursor, print it directly
+  } finally {
+    await client.close();
+  }
 })
 
 
