@@ -7,7 +7,8 @@ import {
   FormLabel,
   Input,
   Button,
-  Select
+  Select,
+  FormHelperText
 } from '@chakra-ui/react';
 
 export default function SecondForm() {
@@ -22,34 +23,26 @@ export default function SecondForm() {
 
             <FormControl isRequired>
               <FormLabel>Please Enter Your Full Name</FormLabel>
-              <Input type="name_one" placeholder="Dohn Joe" />
+              <Input type="sName" placeholder="Dohn Joe" />
             </FormControl>
 
             <FormControl mt={6} isRequired>
-              <FormLabel>Please Enter Your Designated Successor's Full Name</FormLabel>
-              <Input type="name_two" placeholder="Dane Joe" />
+              <FormLabel>Please Enter Your Account's Predecessor's Full Name</FormLabel>
+              <Input type="pName" placeholder="Dane Joe" />
             </FormControl>
 
             <FormControl mt={6} isRequired>
               <FormLabel>Email</FormLabel>
               <Input type="email" placeholder="test@test.com" />
+              <FormHelperText>Please Verify Your Email</FormHelperText>
             </FormControl>
+            
             <FormControl mt={6} isRequired>
-              <FormLabel>Select Your Account Types</FormLabel>
-              <Select placeholder='Select option'>
-                <option value='option1'>Twitter</option>
-                <option value='option2'>Facebook</option>
-                <option value='option3'>LinkedIn</option>
-                <option value='option3'>Reddit</option>
-                <option value='option3'>Instagram</option>
-              </Select>
-            </FormControl>
-            <FormControl mt={6} isRequired>
-              <FormLabel>Access key</FormLabel>
+              <FormLabel>Please verify your access key</FormLabel>
               <Input type="password" placeholder="*******" />
             </FormControl>
             <Button width="full" mt={4} type="submit">
-              Sign In
+              Claim Your Information
             </Button>
           </form>
         </Box>

@@ -5,6 +5,7 @@ import './App.css';
 
 import { ChakraProvider, theme } from '@chakra-ui/react'
 import Form from './components/Form';
+import SecondForm from './components/SecondForm';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
     <ChakraProvider theme={theme}>
     <div className="App">
       <header className="App-header">
-        <Form/>
+        <SecondForm/>
         
       </header>
     </div>
