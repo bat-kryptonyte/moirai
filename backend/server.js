@@ -14,7 +14,12 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const app = express()
 app.use(fileUpload())
-const port = 3000
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+const port = 8000
 
 // MongoClient.connect(mongoURI, function (err, db) {
 //   if (err) throw err;
@@ -24,7 +29,7 @@ const port = 3000
 
 
 app.post('/cypher', urlencodedParser, async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  // res.header("Access-Control-Allow-Origin", "*");
   const body = req.body
   const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   if (body.user_email == undefined || body.user_name == undefined ||
@@ -85,7 +90,7 @@ app.post('/cypher', urlencodedParser, async (req, res) => {
 })
 
 app.post('/retrieve', urlencodedParser, async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  // res.header("Access-Control-Allow-Origin", "*");
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.send({status:-1,message:'No files were uploaded.'});
   }

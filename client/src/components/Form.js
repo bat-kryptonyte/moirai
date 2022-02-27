@@ -54,7 +54,7 @@ export default function Form() {
     setUser({ ...user, "cypherbody": encrypt(user.cypherbody) });
 
     // Todo: post userObj to database 
-    axios.post(`http://localhost:3000/cypher`, { user })
+    axios.post(`http://localhost:8000/cypher`, { user })
     .then(res => {
       console.log(res);
       console.log(res.data);
