@@ -1,8 +1,13 @@
 
 import React, { useEffect, useState } from "react";
-import { Routes,Route } from "react-router";
+import {
+    BrowserRouter,
+    Routes,
+    Route
+  } from "react-router-dom";
 
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import styles from './style.css'; 
 import Form from "./Form";
 import SecondForm from "./SecondForm";
@@ -25,7 +30,14 @@ import {
     InputRightAddon
   } from '@chakra-ui/react';
 export default function Navbar() {
-   
+    const navigate = useNavigate();
+
+   const depositHandler = () => {
+       navigate('/deposit');
+   } 
+   const retrieveHandler = () => {
+    navigate('/retrieve');
+} 
  
   return (
 
@@ -38,8 +50,8 @@ export default function Navbar() {
             <div><img src="bgpic.png" id="background"/>
         </div>
         <div class="buttons">
-            <div id="deposit" >DEPOSIT!</div>
-            <div id="retrieve">RETRIEVE?</div>
+            <div id="deposit" onClick={depositHandler} >DEPOSIT!</div>
+            <div id="retrieve" onClick={retrieveHandler}>RETRIEVE?</div>
         </div>
         <div id="title">
             Moira
