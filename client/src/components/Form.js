@@ -15,14 +15,37 @@ import {
   Checkbox,
   InputGroup,
   FormHelperText,
+  Collapse,
   InputLeftAddon,
   InputRightAddon
 } from '@chakra-ui/react';
+import Accounts from './Accounts';
 
 export default function Form() {
   var CryptoJS = require("crypto-js");
 
+  const [inputList, setInputList] = useState([{ firstName: "", lastName: "" }]);
+    
 
+    // handle input change
+    const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+    };
+    
+    // handle click event of the Remove button
+    const handleRemoveClick = index => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+    };
+    
+    // handle click event of the Add button
+    const handleAddClick = () => {
+    setInputList([...inputList, { firstName: "", lastName: "" }]);
+    };
 
   function encrypt(data) {
     let ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), 'i love cs225').toString();
@@ -57,14 +80,13 @@ export default function Form() {
     axios.post(`http://localhost:8000/cypher`, { user })
     .then(res => {
       console.log(res);
-      console.log(res.data);
     })
   }
 
   
   
   return (
-    <Flex width="full" align="center" justifyContent="center">
+      <Flex width="full" align="center" justifyContent="center">
       <Box p={2}>
         <Box textAlign="center">
           <Heading>Some Basic Info</Heading>
@@ -74,7 +96,7 @@ export default function Form() {
 
             <FormControl mt= {6} isRequired>
               <FormLabel>Please Enter Your Full Name</FormLabel>
-              <Input type="name_one" name="user_name" placeholder="Dohn Joe" onChange={(e) => handleChange("user_name", e)} />
+              <Input type="name_one"  placeholder="Dohn Joe" onChange={(e) => handleChange("user_name", e)} />
             </FormControl>
 
             <FormControl mt={6} isRequired>
@@ -97,27 +119,33 @@ export default function Form() {
               <FormLabel as='legend'>Select Your Account Types</FormLabel>
               <CheckboxGroup colorScheme='green' >
                 <Stack spacing={[1, 5]} direction={['column', 'row']}>
-                  <Checkbox value='twitter' onChange={() => handleChange("twitterSelected", true)}>Twitter</Checkbox>
-                  <Checkbox value='facebook' onChange={() => handleChange("facebookSelected", true)}>Facebook</Checkbox>
-                  <Checkbox value='instagram'onChange={() => handleChange("instagramSelected", true)}>Instagram</Checkbox>
-                  <Checkbox value='reddit'onChange={() => handleChange("redditSelected", true)}>Reddit</Checkbox>
-                  <Checkbox value='linkedin'onChange={() => handleChange("linkedinSelected", true)}>LinkedIn</Checkbox>
+                  <Checkbox value='twitter' >Twitter</Checkbox>
+                  <Checkbox value='facebook' >Facebook</Checkbox>
+                  <Checkbox value='instagram'>Instagram</Checkbox>
+                  <Checkbox value='reddit'>Reddit</Checkbox>
+                  <Checkbox value='linkedin'>LinkedIn</Checkbox>
                 </Stack>
               </CheckboxGroup>
             </FormControl>
-            
+            <Accounts/>
+
             <FormControl mt={6} isRequired>
               <FormLabel>Access key</FormLabel>
               <Input type="password" placeholder="*******" onChange={(e) => handleChange("cypherbody", e)} />
               <FormHelperText>Please remember to explain this text</FormHelperText>
             </FormControl>
-            <Button width="full" mt={4} color='black'onClick={handleSubmit}>
-              Submit
-            </Button>
-          </form>
-        </Box>
-      </Box>
+          
+                      <Button width="full" mt={4} color='black'onClick={handleSubmit}>
+                        Submit
+                      </Button>
+                    </form>
+                  </Box>
+                </Box>
 
-    </Flex>
+              </Flex>
+      
+    
+    
+   
   );
 }
