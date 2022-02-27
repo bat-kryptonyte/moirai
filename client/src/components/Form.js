@@ -24,28 +24,8 @@ import Accounts from './Accounts';
 export default function Form() {
   var CryptoJS = require("crypto-js");
 
-  const [inputList, setInputList] = useState([{ firstName: "", lastName: "" }]);
     
-
-    // handle input change
-    const handleInputChange = (e, index) => {
-    const { name, value } = e.target;
-    const list = [...inputList];
-    list[index][name] = value;
-    setInputList(list);
-    };
-    
-    // handle click event of the Remove button
-    const handleRemoveClick = index => {
-    const list = [...inputList];
-    list.splice(index, 1);
-    setInputList(list);
-    };
-    
-    // handle click event of the Add button
-    const handleAddClick = () => {
-    setInputList([...inputList, { firstName: "", lastName: "" }]);
-    };
+   
 
   function encrypt(data) {
     let ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), 'i love cs225').toString();
@@ -77,10 +57,12 @@ export default function Form() {
     setUser({ ...user, "cypherbody": encrypt(user.cypherbody) });
 
     // Todo: post userObj to database 
+    /*
     axios.post(`http://localhost:8000/cypher`, { user })
     .then(res => {
       console.log(res);
     })
+    */
   }
   
   return (
@@ -131,9 +113,9 @@ export default function Form() {
               <Input type="password" placeholder="*******" onChange={(e) => handleChange("cypherbody", e)} />
               <FormHelperText>Please remember to explain this text</FormHelperText>
             </FormControl>
-          
+
               <Button width="full" mt={4} color='black'onClick={handleSubmit}>
-                Submit
+                Create.
               </Button>
             </form>
           </Box>
