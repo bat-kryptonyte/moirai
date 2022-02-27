@@ -135,17 +135,12 @@ export default function Form() {
               <FormHelperText>Please remember to explain this text</FormHelperText>
             </FormControl>
           
-                      <Button width="full" mt={4} color='black'onClick={handleSubmit}>
-                        Submit
-                      </Button>
-                    </form>
-                  </Box>
-                </Box>
-
-              </Flex>
-      
-    
-    
-   
+              <Button width="full" mt={4} color='black'onClick={handleSubmit}>
+                Submit
+              </Button>
+            </form>
+          </Box>
+        </Box>
+      </Flex>
   );
 }
