@@ -59,6 +59,7 @@ export default function Accounts() {
 
                <FormLabel mt = {6}>Please enter your password for this account</FormLabel>
                 <Input
+                type="password"
              name="password"
              placeholder="*******" 
              defaultvalue={x.passWord}
