@@ -31,10 +31,3 @@ function decryptMessage(dictionary, key) {
 }
 
 
-//// tests /////
-var ciphertext = createCipher("louisunlimited", "1234567890", "secret key 123");
-var decryptedData = decryptMessage(ciphertext, "secret key 123");
-
-console.log(ciphertext);
-console.log(decryptedData);
-

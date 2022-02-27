@@ -12,13 +12,15 @@ import {
 } from '@chakra-ui/react';
 
 export default function SecondForm() {
-    return (
-      <Flex width="full" align="center" justifyContent="center">
-        <Box p={2}>
-          <Box textAlign="center">
-            <Heading>Claim Your Accounts</Heading>
-          </Box>
-          <Box my={4} textAlign="left">
+  return (
+    <Flex width="full" align="center" justifyContent="center">
+      <Box p={2}>
+        <Box textAlign="center">
+          <Heading>Claim Your Accounts</Heading>
+        </Box>
+
+        <Box my={4} textAlign="left">
+
           <form>
 
             <FormControl isRequired>
@@ -28,26 +30,29 @@ export default function SecondForm() {
 
             <FormControl mt={6} isRequired>
               <FormLabel>Please Enter Your Account's Predecessor's Full Name</FormLabel>
-              <Input type="pName" placeholder="Dane Joe" />
+                 <Input type="pName" placeholder="Dane Joe" />
             </FormControl>
-
+  
             <FormControl mt={6} isRequired>
               <FormLabel>Email</FormLabel>
               <Input type="email" placeholder="test@illinois.edu" />
+
               <FormHelperText>Please Verify Your Email</FormHelperText>
+
             </FormControl>
-            
+              
             <FormControl mt={6} isRequired>
               <FormLabel>Please verify your access key</FormLabel>
               <Input type="password" placeholder="*******" />
             </FormControl>
+
             <Button width="full" mt={4} color='black' type="submit">
               Claim Your Information
             </Button>
+            
           </form>
         </Box>
-        </Box>
-
-      </Flex>
-    );
-  }
+      </Box>
+    </Flex>
+  );
+}

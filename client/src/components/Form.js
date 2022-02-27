@@ -82,8 +82,6 @@ export default function Form() {
       console.log(res);
     })
   }
-
-  
   
   return (
       <Flex width="full" align="center" justifyContent="center">
@@ -108,7 +106,6 @@ export default function Form() {
               <FormLabel>Please Enter Your Email</FormLabel>
               <Input type="email" placeholder="test@illinois.edu" onChange={(e) => handleChange("user_email", e)} />
             </FormControl>
-
 
             <FormControl mt={6} isRequired>
               <FormLabel>Please Enter Your Designated Heir's Email</FormLabel>
