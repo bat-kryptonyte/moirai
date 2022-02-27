@@ -58,13 +58,19 @@ export default function Form() {
             </FormControl>
 
             <FormControl mt={6} isRequired>
-              <FormLabel>Please Enter Your Designated Successor's Full Name</FormLabel>
+              <FormLabel>Please Enter Your Designated Heir's Full Name</FormLabel>
               <Input type="name_two" placeholder="Dane Joe" onChange={(e) => handleChange("heir_name", e)} />
             </FormControl>
 
             <FormControl mt={6} isRequired>
-              <FormLabel>Email</FormLabel>
-              <Input type="email" placeholder="test@test.com" onChange={(e) => handleChange("user_email", e)} />
+              <FormLabel>Please Enter Your Email</FormLabel>
+              <Input type="email" placeholder="test@illinois.edu" onChange={(e) => handleChange("user_email", e)} />
+            </FormControl>
+
+
+            <FormControl mt={6} isRequired>
+              <FormLabel>Please Enter Your Designated Heir's Email</FormLabel>
+              <Input type="email" placeholder="test@illinois.edu" onChange={(e) => handleChange("heir_email", e)} />
             </FormControl>
             
             <FormControl mt = {6} as='fieldset' isRequired>
@@ -83,8 +89,8 @@ export default function Form() {
               <FormLabel>Access key</FormLabel>
               <Input type="password" placeholder="*******" onChange={(e) => handleChange("cypherbody", e)} />
             </FormControl>
-            <Button width="full" mt={4} onClick={handleSubmit}>
-              Sign In
+            <Button width="full" mt={4} color='black'onClick={handleSubmit}>
+              Submit
             </Button>
           </form>
         </Box>
