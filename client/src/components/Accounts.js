@@ -20,6 +20,7 @@ import {
 } from '@chakra-ui/react';
 
 export default function Accounts() {
+    
   const [inputList, setInputList] = useState([{ userName: "", passWord: "" }]);
     // handle input change
   const handleInputChange = (e, index) => {
@@ -28,7 +29,6 @@ export default function Accounts() {
     list[index][name] = value;
     setInputList(list);
   };
-  
   // handle click event of the Remove button
   const handleRemoveClick = index => {
     const list = [...inputList];

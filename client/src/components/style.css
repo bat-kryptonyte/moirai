@@ -1,0 +1,141 @@
+body {
+    font-family: Serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; 
+   
+    overflow: hidden; 
+}
+#background {
+    height: absolute;
+    width: absolute;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+}
+#decimal {
+    z-index: 1;
+    position: absolute;
+    height: 90%;
+    width: auto;
+    top: 5%;
+    left: 1050px;
+    /* overflow: hidden; */
+    animation: rotateImgClockwise 30s linear infinite;
+}
+
+#clock {
+    z-index: 1;
+    position: absolute;
+    height: 80%;
+    width: auto;
+    top: 10%;
+    left: 1100px;
+    /* overflow: hidden; */
+    animation: rotateImgCounterClockwise 40s linear infinite;
+}
+
+#key {
+    z-index: 1;
+    position: absolute;
+    height: 30%;
+    width: auto;
+    top: 20%;
+    left: 1390px;
+    /* overflow: hidden; */
+    animation: rotateImgBottom 60s linear infinite;
+}
+
+#title {
+    /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace; */
+    /* M O I R A I */
+    position: absolute;
+    width: 404px;
+    height: 115px;
+    left: 100px;
+    top: 150px;
+    font: Arial;
+    font-size: 96px;
+    line-height: 115px;
+    text-align: left;
+    letter-spacing: 0.3em;
+    color: #FFFFFF;
+}
+
+#subtitle {
+    position: absolute;
+    width: 600px;
+    height: 200px;
+    left: 100px;
+    top: 320px;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: left;
+    letter-spacing: 0.1em;
+    color: #FFFFFF;
+}
+
+#line1::after,
+#line2::after {
+    content: "\a";
+    white-space: pre;
+}
+
+.buttons {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    top: 500px;
+    left: 50px;
+    right: 800px;
+}
+
+#deposit,
+#retrieve {
+    background-color: #FFFFFF;
+    width: 200px;
+    height: auto;
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 0.1em;
+}
+
+#deposit:hover,
+#retrieve:hover {
+    background-color: black;
+    color: white;
+    border-color: #FFFFFF;
+}
+
+@keyframes rotateImgClockwise {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateImgCounterClockwise {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes rotateImgBottom {
+    from {
+        transform: rotate(-90deg);
+        transform-origin: bottom;
+    }
+    to {
+        transform: rotate(90deg);
+        transform-origin: bottom;
+    }
+}
