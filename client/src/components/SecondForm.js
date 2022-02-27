@@ -33,7 +33,7 @@ export default function SecondForm() {
 
             <FormControl mt={6} isRequired>
               <FormLabel>Email</FormLabel>
-              <Input type="email" placeholder="test@test.com" />
+              <Input type="email" placeholder="test@illinois.edu" />
               <FormHelperText>Please Verify Your Email</FormHelperText>
             </FormControl>
             
@@ -41,7 +41,7 @@ export default function SecondForm() {
               <FormLabel>Please verify your access key</FormLabel>
               <Input type="password" placeholder="*******" />
             </FormControl>
-            <Button width="full" mt={4} type="submit">
+            <Button width="full" mt={4} color='black' type="submit">
               Claim Your Information
             </Button>
           </form>
