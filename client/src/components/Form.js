@@ -7,7 +7,11 @@ import {
   FormLabel,
   Input,
   Button,
-  Select
+  Select,
+  CheckboxGroup,
+  Stack,
+  Checkbox,
+  FormHelperText
 } from '@chakra-ui/react';
 
 export default function Form() {
@@ -48,31 +52,34 @@ export default function Form() {
         <Box my={4} textAlign="left">
           <form>
 
-            <FormControl>
+            <FormControl mt= {6} isRequired>
               <FormLabel>Please Enter Your Full Name</FormLabel>
               <Input type="name_one" name="user_name" placeholder="Dohn Joe" onChange={(e) => handleChange("user_name", e)} />
             </FormControl>
 
-            <FormControl mt={6}>
+            <FormControl mt={6} isRequired>
               <FormLabel>Please Enter Your Designated Successor's Full Name</FormLabel>
               <Input type="name_two" placeholder="Dane Joe" onChange={(e) => handleChange("heir_name", e)} />
             </FormControl>
 
-            <FormControl mt={6}>
+            <FormControl mt={6} isRequired>
               <FormLabel>Email</FormLabel>
               <Input type="email" placeholder="test@test.com" onChange={(e) => handleChange("user_email", e)} />
             </FormControl>
-            <FormControl mt={6}>
-              <FormLabel>Select Your Account Types</FormLabel>
-              <Select placeholder='Select option'>
-                <option value='option1'>Twitter</option>
-                <option value='option2'>Facebook</option>
-                <option value='option3'>LinkedIn</option>
-                <option value='option3'>Reddit</option>
-                <option value='option3'>Instagram</option>
-              </Select>
+            
+            <FormControl mt = {6} as='fieldset' isRequired>
+              <FormLabel as='legend'>Select Your Account Types</FormLabel>
+              <CheckboxGroup colorScheme='green' >
+                <Stack spacing={[1, 5]} direction={['column', 'row']}>
+                  <Checkbox value='twitter'>Twitter</Checkbox>
+                  <Checkbox value='facebook'>Facebook</Checkbox>
+                  <Checkbox value='instagram'>Instagram</Checkbox>
+                  <Checkbox value='reddit'>Reddit</Checkbox>
+                  <Checkbox value='linkedin'>LinkedIn</Checkbox>
+                </Stack>
+              </CheckboxGroup>
             </FormControl>
-            <FormControl mt={6}>
+            <FormControl mt={6} isRequired>
               <FormLabel>Access key</FormLabel>
               <Input type="password" placeholder="*******" onChange={(e) => handleChange("cypherbody", e)} />
             </FormControl>
