@@ -28,6 +28,29 @@ export default function Form() {
     return ciphertext;
   }
 
+  const [inputList, setInputList] = useState([{ userName: "", passWord: "" }]);
+  const [userData, setUserData] = useState("");
+
+  // handle input change
+  const handleInputChange = async (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    await setInputList(list);
+    await setUserData(encrypt(list));
+  };
+  // handle click event of the Remove button
+  const handleRemoveClick = index => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+  // handle click event of the Add button
+  const handleAddClick = () => {
+    setInputList([...inputList, { userName: "", passWord: "" }]);
+  };
+
   // default object, might want to retrieve from database
   let userObj = {
     user_name: "",
@@ -53,9 +76,7 @@ export default function Form() {
 
   async function handleSubmit() {
     await setUser({ ...user, "cypherbody": encrypt(user.cypherbody) });
-    await setUser({ ...user, "cypherbody": user.cypherbody + encrypt(accountData) });
-    // console.log(document.getElementsByClassName("accountForm").value);
-    // Todo: post userObj to database 
+    await setUser({ ...user, "cypherbody": user.cypherbody + encrypt(userData) });    // Todo: post userObj to database 
     /*
     axios.post(`http://localhost:8000/cypher`, { user })
     .then(res => {
@@ -63,9 +84,9 @@ export default function Form() {
     })
     */
   }
-  
+
   return (
-      <Flex width="full" align="center" justifyContent="center">
+    <Flex width="full" align="center" justifyContent="center">
       <Box p={2}>
         <Box textAlign="center">
           <Heading>Some Basic Info</Heading>
@@ -73,9 +94,9 @@ export default function Form() {
         <Box my={4} textAlign="left">
           <form>
 
-            <FormControl mt= {6} isRequired>
+            <FormControl mt={6} isRequired>
               <FormLabel>Please Enter Your Full Name</FormLabel>
-              <Input type="name_one"  placeholder="Dohn Joe" onChange={(e) => handleChange("user_name", e)} />
+              <Input type="name_one" placeholder="Dohn Joe" onChange={(e) => handleChange("user_name", e)} />
             </FormControl>
 
             <FormControl mt={6} isRequired>
@@ -92,7 +113,7 @@ export default function Form() {
               <FormLabel>Please Enter Your Designated Heir's Email</FormLabel>
               <Input type="email" placeholder="test@illinois.edu" onChange={(e) => handleChange("heir_email", e)} />
             </FormControl>
-            
+
             {/* <FormControl mt = {6} as='fieldset' isRequired>
               <FormLabel as='legend'>Select Your Account Types</FormLabel>
               <CheckboxGroup colorScheme='green' >
@@ -105,7 +126,27 @@ export default function Form() {
                 </Stack>
               </CheckboxGroup>
             </FormControl> */}
-            <Accounts data={accountData}/>
+            {/* <Accounts data={accountData}/> */}
+            {
+              inputList.map((x, i) => {
+                return (
+                  <form className="accountForm" value={userData}>
+                    <FormControl mt={6} isRequired>
+                      <FormLabel>
+                        Please enter your username for this account
+                      </FormLabel>
+                      <Input name="name" placeholder="bat-kryptonyte" defaultvalue={x.userName} onChange={e => handleInputChange(e, i)} />
+                      <FormLabel mt={6}>
+                        Please enter your password for this account
+                      </FormLabel>
+                      <Input type="password" name="password" placeholder="*******" defaultvalue={x.passWord} onChange={e => handleInputChange(e, i)} />
+                      {inputList.length !== 1 && <Button color="black" onClick={() => handleRemoveClick(i)}>Remove this entry</Button>}
+                      {inputList.length - 1 === i && <Button color="black" onClick={handleAddClick}>Add another account </Button>}
+                    </FormControl>
+                  </form>
+                );
+              })
+            }
 
             <FormControl mt={6} isRequired>
               <FormLabel>Access key</FormLabel>
@@ -113,12 +154,12 @@ export default function Form() {
               <FormHelperText>Please remember to explain this text</FormHelperText>
             </FormControl>
 
-              <Button width="full" mt={4} color='black'onClick={handleSubmit}>
-                Create.
-              </Button>
-            </form>
-          </Box>
+            <Button width="full" mt={4} color='black' onClick={handleSubmit}>
+              Create.
+            </Button>
+          </form>
         </Box>
-      </Flex>
+      </Box>
+    </Flex>
   );
 }

@@ -50,6 +50,7 @@ export default function Accounts(data) {
   const handleAddClick = () => {
     setInputList([...inputList, { userName: "", passWord: "" }]);
   };
+  
   return (
     inputList.map((x, i) => {
       return (
