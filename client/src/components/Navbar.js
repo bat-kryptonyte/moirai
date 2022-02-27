@@ -1,7 +1,11 @@
 
 import React, { useEffect, useState } from "react";
+import { Routes,Route } from "react-router";
 
+import { Link } from "react-router-dom";
 import styles from './style.css'; 
+import Form from "./Form";
+import SecondForm from "./SecondForm";
 import {
     Flex,
     Box,
@@ -24,7 +28,9 @@ export default function Navbar() {
    
  
   return (
+
     <div style={styles} >
+    
         <div class="decors">
             <div><img src="decimal.png" id="decimal"/>
             <div><img src="clock.png" id="clock"/>
