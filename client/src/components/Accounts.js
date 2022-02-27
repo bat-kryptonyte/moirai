@@ -53,7 +53,7 @@ export default function Accounts() {
                 <Input
              name="name"
             placeholder="bat-kryptonyte"
-             value={x.userName}
+             defaultvalue={x.userName}
              onChange={e => handleInputChange(e, i)}
            />
 
@@ -61,7 +61,7 @@ export default function Accounts() {
                 <Input
              name="password"
              placeholder="*******" 
-             value={x.passWord}
+             defaultvalue={x.passWord}
              onChange={e => handleInputChange(e, i)}
            />
             {inputList.length !== 1 && <Button
