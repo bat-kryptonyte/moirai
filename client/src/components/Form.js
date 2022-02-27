@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
-import axios from 'axios';
+// import axios from 'axios';
 import {
   Flex,
   Box,
@@ -24,9 +23,6 @@ import Accounts from './Accounts';
 export default function Form() {
   var CryptoJS = require("crypto-js");
 
-    
-   
-
   function encrypt(data) {
     let ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), 'i love cs225').toString();
     return ciphertext;
@@ -47,15 +43,18 @@ export default function Form() {
     linkedinSelected: false
   }
 
+  let accountData = "";
+
   let [user, setUser] = useState(userObj);
 
   function handleChange(name, e) {
     setUser({ ...user, [name]: e.target.value });
   }
 
-  function handleSubmit() {
-    setUser({ ...user, "cypherbody": encrypt(user.cypherbody) });
-
+  async function handleSubmit() {
+    await setUser({ ...user, "cypherbody": encrypt(user.cypherbody) });
+    await setUser({ ...user, "cypherbody": user.cypherbody + encrypt(accountData) });
+    // console.log(document.getElementsByClassName("accountForm").value);
     // Todo: post userObj to database 
     /*
     axios.post(`http://localhost:8000/cypher`, { user })
@@ -94,7 +93,7 @@ export default function Form() {
               <Input type="email" placeholder="test@illinois.edu" onChange={(e) => handleChange("heir_email", e)} />
             </FormControl>
             
-            <FormControl mt = {6} as='fieldset' isRequired>
+            {/* <FormControl mt = {6} as='fieldset' isRequired>
               <FormLabel as='legend'>Select Your Account Types</FormLabel>
               <CheckboxGroup colorScheme='green' >
                 <Stack spacing={[1, 5]} direction={['column', 'row']}>
@@ -105,8 +104,8 @@ export default function Form() {
                   <Checkbox value='linkedin'>LinkedIn</Checkbox>
                 </Stack>
               </CheckboxGroup>
-            </FormControl>
-            <Accounts/>
+            </FormControl> */}
+            <Accounts data={accountData}/>
 
             <FormControl mt={6} isRequired>
               <FormLabel>Access key</FormLabel>
